@@ -3223,7 +3223,7 @@ const DataEditorImpl: React.ForwardRefRenderFunction<DataEditorRef, DataEditorPr
                             {
                                 x: rowMarkerOffset,
                                 y: rowIndex,
-                                width: columnsIn.length - rowMarkerOffset,
+                                width: columnsIn.length + 1 - rowMarkerOffset,
                                 height: 1,
                             },
                             abortControllerRef.current.signal
@@ -3308,7 +3308,7 @@ const DataEditorImpl: React.ForwardRefRenderFunction<DataEditorRef, DataEditorPr
 
     const selectionOutOfBounds =
         gridSelection.current !== undefined &&
-        (gridSelection.current.cell[0] >= columnsIn.length || gridSelection.current.cell[1] >= mangledRows);
+        (gridSelection.current.cell[0] > columnsIn.length || gridSelection.current.cell[1] >= mangledRows);
     React.useLayoutEffect(() => {
         if (selectionOutOfBounds) {
             setGridSelection(emptyGridSelection, false);
