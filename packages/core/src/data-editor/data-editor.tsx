@@ -525,8 +525,8 @@ export interface DataEditorProps extends Props {
      * Determins which keybindings are enabled.
      * @group Editing
      * @defaultValue is
-     
-            {  
+
+            {
                 selectAll: true,
                 selectRow: true,
                 selectColumn: true,
@@ -3085,27 +3085,7 @@ const DataEditorImpl: React.ForwardRefRenderFunction<DataEditorRef, DataEditorPr
                 const textPlain = "text/plain";
                 const textHtml = "text/html";
 
-                if (navigator.clipboard.read !== undefined) {
-                    const clipboardContent = await navigator.clipboard.read();
-
-                    for (const item of clipboardContent) {
-                        if (item.types.includes(textHtml)) {
-                            const htmlBlob = await item.getType(textHtml);
-                            const html = await htmlBlob.text();
-                            const fragment = document.createElement("html");
-                            fragment.innerHTML = html;
-                            const el = fragment.querySelector("table");
-                            if (el !== null) {
-                                data = decodeHTML(el);
-                                break;
-                            }
-                        }
-                        if (item.types.includes(textPlain)) {
-                            // eslint-disable-next-line unicorn/no-await-expression-member
-                            text = await (await item.getType(textPlain)).text();
-                        }
-                    }
-                } else if (navigator.clipboard.readText !== undefined) {
+                if (navigator.clipboard.readText !== undefined) {
                     text = await navigator.clipboard.readText();
                 } else if (e !== undefined && e?.clipboardData !== null) {
                     if (e.clipboardData.types.includes(textHtml)) {
