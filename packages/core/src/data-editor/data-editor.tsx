@@ -69,6 +69,8 @@ interface MouseState {
     readonly fillHandle?: boolean;
 }
 
+console.log('test')
+
 type Props = Partial<
     Omit<
         DataGridSearchProps,
