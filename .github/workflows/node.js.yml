@@ -16,9 +16,12 @@ jobs:
                   node-version: 16
             - run: npm install
             - run: npm run build
-            - name: Coveralls
-              uses: coverallsapp/github-action@master
+
+            - uses: actions/setup-node@v3
               with:
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
-                  path-to-lcov: ./packages/core/coverage/lcov.info
-                  base-path: ./packages/core
+                  node-version: 16
+                  registry-url: https://npm.pkg.github.com/
+            - run: npm ci
+            - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
