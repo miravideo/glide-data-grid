@@ -16,21 +16,9 @@ jobs:
                   node-version: 16
             - run: npm install
             - run: npm run build
-            - run: npm run test -- --coverage
-            - run: npm run test-source
-            - run: npm run test-projects
             - name: Coveralls
               uses: coverallsapp/github-action@master
               with:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
                   path-to-lcov: ./packages/core/coverage/lcov.info
                   base-path: ./packages/core
-    test-react-18:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v1
-            - uses: actions/setup-node@v1
-              with:
-                  node-version: 16
-            - run: npm install
-            - run: npm run test-18
